@@ -64,3 +64,20 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Help Ticket
+
+#### Table Structure
+
+1. Ticket
+    - title (string) {required}
+    - description (text) {required}
+    - status (open {default}, reject, resolved)
+    - attachment (string) {nullable}
+    - user_id {required} filled by laravel
+    - status_changed_by_id {nullable}
+
+2. Replies
+    - body (text) {required}
+    - user_id {required} filled by laravel
+    - ticket_id {required} filled by laravel
