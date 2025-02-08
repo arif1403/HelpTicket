@@ -15,8 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('ticket.create')" :active="\Illuminate\Support\Str::startsWith(request()->route()->getName(), 'ticket')">
+                        Support Ticket
+                    </x-nav-link>
                 </div>
             </div>
+
+            <!-- <div class="flex flex-col justify-center">
+                <a href="#" class="ml-3 bg-white rounded-lg p-2">
+                    Support Ticket
+                </a>
+             
+            </div> -->
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

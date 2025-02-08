@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -13,7 +15,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::orderBy('created_at', 'desc')->get();
+        return view('ticket.index', compact('tickets'));
     }
 
     /**
@@ -21,7 +24,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return view('ticket.create');
     }
 
     /**
@@ -29,7 +32,23 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        $ticket = Ticket::create([
+            'ticket' => $request->title,
+            'description' => $request->description,
+            'user_id' => auth()->id(),
+        ]);
+
+        if ($request->file('attachment')) {
+            $ext = $request->file('attachment')->extension();
+            $contents = file_get_contents($request->file('attachment'));
+            $filename = Str::random(25);
+            $path = "attachment/$filename.$ext";
+            Storage::disk('public')->put($path, $contents);
+            $ticket->update(['attachment' => $path]);
+        }
+
+        // return response()->redirect(route('ticket.index'));
+        return redirect()->back()->with('success','Task created successfully');
     }
 
     /**
@@ -37,7 +56,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
