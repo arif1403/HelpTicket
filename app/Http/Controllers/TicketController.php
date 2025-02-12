@@ -33,7 +33,7 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request)
     {
         $ticket = Ticket::create([
-            'ticket' => $request->title,
+            'title' => $request->title,
             'description' => $request->description,
             'user_id' => auth()->id(),
         ]);
@@ -48,7 +48,7 @@ class TicketController extends Controller
         }
 
         // return response()->redirect(route('ticket.index'));
-        return redirect()->back()->with('success','Task created successfully');
+        return redirect()->back()->with('success','Task created successfully!');
     }
 
     /**
@@ -64,7 +64,7 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-        //
+        return view('ticket.edit', compact('ticket'));
     }
 
     /**
@@ -72,7 +72,23 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        if ($request->file('attachment')) {
+            if ($ticket->attachment && Storage::disk('public')->exists($ticket->attachment)) {
+                Storage::disk('public')->delete($ticket->attachment);
+            }
+            $ext = $request->file('attachment')->extension();
+            $contents = file_get_contents($request->file('attachment'));
+            $filename = Str::random(25);
+            $path = "attachment/$filename.$ext";
+            Storage::disk('public')->put($path, $contents);
+            $ticket->update(['attachment' => $path]);
+        }
+        return redirect()->route('ticket.index')->with('success','Update Successfully!');
     }
 
     /**
@@ -80,6 +96,11 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        if ($ticket->attachment && Storage::disk('public')->exists($ticket->attachment)) {
+            Storage::disk('public')->delete($ticket->attachment);
+        }
+
+        $ticket->delete();
+        return redirect()->route('ticket.index')->with('success', 'Delete Successfully!');
     }
 }

@@ -11,27 +11,19 @@
                             <tr class="bg-gray-200 dark:bg-gray-700">
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">No.</th>
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Title</th>
-                                <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Description</th>
-                                <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Attachment</th>
-                                <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Status</th>
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Created At</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($tickets as $ticket)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $loop->iteration }}</td>
-                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->title }}</td>
-                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->description }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                                    @if($ticket->attachment)
-                                    <a href="{{ asset('storage/'.$ticket->attachment) }}" class="text-blue-500 underline" target="_blank">View</a>
-                                    @else
-                                    No Attachment
-                                    @endif
+                                    <a href="{{route('$ticket.show', $ticket->id)}}">{{ $ticket->title }}</a>
                                 </td>
-                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->status }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->created_at->diffForHumans() }}</td>
+                                
                             </tr>
                             @endforeach
                         </tbody>
