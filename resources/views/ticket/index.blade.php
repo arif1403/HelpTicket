@@ -20,7 +20,7 @@
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $loop->iteration }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                                    <a href="{{route('$ticket.show', $ticket->id)}}">{{ $ticket->title }}</a>
+                                    <a href="{{ route('ticket.show', $ticket->id) }}">{{ $ticket->title }}</a>
                                 </td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->created_at->diffForHumans() }}</td>
                                 
@@ -30,6 +30,11 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="flex items-center justify-end mt-4">
+            <x-primary-button class="ms-4">
+                <a href="{{ route('ticket.create') }}">Create Ticket</a>
+            </x-primary-button>
         </div>
     </div>
 </x-app-layout>

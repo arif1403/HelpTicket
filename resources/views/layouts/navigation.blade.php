@@ -28,7 +28,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-nav-link :href="route('ticket.create')" :active="\Illuminate\Support\Str::startsWith(request()->route()->getName(), 'ticket')">
+                <x-nav-link :href="route('ticket.index')" :active="\Illuminate\Support\Str::startsWith(request()->route()->getName(), 'ticket')">
                     Support Ticket
                 </x-nav-link>
                 <x-dropdown align="right" width="48">

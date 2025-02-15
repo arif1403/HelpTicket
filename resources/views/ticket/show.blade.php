@@ -9,8 +9,7 @@
                     <table class="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700">
                         <thead>
                             <tr class="bg-gray-200 dark:bg-gray-700">
-                                <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">No.</th>
-                                <!-- <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Title</th> -->
+                        
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Description</th>
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Attachment</th>
                                 <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Status</th>
@@ -19,10 +18,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- @foreach($tickets as $ticket) -->
+                            
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $loop->iteration }}</td>
-                                <!-- <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->title }}</td> -->
+                              
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->description }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">
                                     @if($ticket->attachment)
@@ -48,7 +46,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- @endforeach -->
+                            
                         </tbody>
                     </table>
                 </div>
