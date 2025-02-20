@@ -6,6 +6,9 @@
         <div class="max-w-lg mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                    @if($tickets->isEmpty())
+                    <p class="text-white">You don't have any support ticket yet.</p>
+                    @else
                     <table class="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700">
                         <thead>
                             <tr class="bg-gray-200 dark:bg-gray-700">
@@ -26,8 +29,10 @@
                                 
                             </tr>
                             @endforeach
+                           
                         </tbody>
                     </table>
+                    @endif
                 </div>
             </div>
         </div>

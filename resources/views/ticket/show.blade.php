@@ -32,7 +32,7 @@
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->status }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $ticket->created_at->diffForHumans() }}</td>
                                 <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                                    <div class="flex align-items-center gap-2">
+                                    <div class="flex justify-between">
                                         <x-primary-button>
                                             <a href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
                                         </x-primary-button>
@@ -43,6 +43,15 @@
                                                 Delete
                                             </x-danger-button>
                                         </form>
+                                        @if(auth()->user()->isAdmin)
+                                        <!-- Status Action -->
+                                        <x-primary-button class="ml-4 bg-green">
+                                            <a href="#">Approve</a>
+                                        </x-primary-button>
+                                        <x-primary-button class="ml-4 bg-yellow">
+                                            <a href="#">Reject</a>
+                                        </x-primary-button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

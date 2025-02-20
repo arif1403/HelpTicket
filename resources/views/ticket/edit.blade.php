@@ -16,18 +16,18 @@
                 </div>
                 <div class="mt-6">
                     <x-input-label for="description" :value="__('Description')" />
-                    <x-textarea name="description" id="description" />
+                    <x-textarea name="description" id="description" value="{{ $ticket->description }}" />
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
                 <div class="mt-6">
                     @if($ticket->attachment)
-                    <a href="{{ asset('storage/'.$ticket->attachment) }}" class="text-blue-500 underline" target="_blank">View Attachment</a>
+                    <a href="{{ asset('storage/'.$ticket->attachment) }}" class="text-white underline" target="_blank">View Attachment</a>
                     @endif
                     <x-input-label for="attachment" :value="__('Attachment (if any)')" />
                     <x-file-input type="file" name="attachment" id="attachment" />
                     <x-input-error :messages="$errors->get('attachment')" class="mt-2" />
                 </div>
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex items-center justify-end mt-4 gap-4">
                     <x-primary-button class="ms-3">
                         Submit Bruhh!
                     </x-primary-button>
